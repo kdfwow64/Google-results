@@ -45,9 +45,13 @@ class MailController extends Controller
 
         $blacklist = BlackList::get(['*']);
         for( $i = 0 ; $i < sizeof($blacklist) ; $i++ ) {
-            DB::update('update infos set black = "1" where domain_name like ?' , [$blacklist[$i]['domain']]);
-            $sub = '.'.$blacklist[$i]['domain'];
-            DB::update('update infos set black = "1" where domain_name like ?' , [$sub]);
+            if( $blacklist[$i]['domainORemail'] == '1' ) {
+                DB::update('update infos set black = "1" where domain_name like ?' , [$blacklist[$i]['domain']]);
+                $sub = '.'.$blacklist[$i]['domain'];
+                DB::update('update infos set black = "1" where domain_name like ?' , [$sub]);
+            } else if( $blacklist[$i]['domainORemail'] == '2' ) {
+                DB::update('update infos set black = "1" where email like ?' , [$blacklist[$i]['domain']]);
+            }
         }
         $info = Info::get(['*']);
         for( $i = 0 ; $i < sizeof($info) ; $i++ ) {
@@ -58,7 +62,9 @@ class MailController extends Controller
                 $objDemo->sender = 'Google Scraping Server';
                 $objDemo->receiver = $info[$i]['admins_name'];
          
-                Mail::to($info[$i]['email'])->send(new DemoEmail($objDemo));
+                if(preg_match("/^[a-zA-Z]*$/",$info[$i]['email'])) {
+                    Mail::to($info[$i]['email'])->send(new DemoEmail($objDemo));
+                }
             }
         }
     }

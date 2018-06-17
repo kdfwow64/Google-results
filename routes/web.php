@@ -29,4 +29,5 @@ Route::post('/home/getDomains', 'HomeController@getDomains');
 Route::post('/home/getEmail', 'HomeController@getEmail');
 Route::post('/mail/sendAll', 'MailController@sendAll');
 Route::post('/mail/save', 'MailController@save');
-Route::post('/blacklist/insert', 'HomeController@insert');
+Route::post('/blacklist/insertD', 'HomeController@insertD');
+Route::post('/blacklist/insertE', 'HomeController@insertE');

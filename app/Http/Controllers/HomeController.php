@@ -44,21 +44,39 @@ class HomeController extends Controller
 
     public function blacklist() {
         $blacklist = BlackList::get(['*']);
-        return view('others.blacklist',compact('blacklist'));
+        $domain_count = 0;
+        $email_count = 0;
+        return view('others.blacklist',compact('blacklist','domain_count','email_count'));
     }
 
-    public function insert(Request $request) {
+    public function insertD(Request $request) {
         $new_info = new BlackList;
         $new_info->domain = $request->input('blacklist_domain');
+        $new_info->domainORemail = '1';
         $new_info->save();
         $blacklist = BlackList::get(['*']);
-        return view('others.blacklist',compact('blacklist'));
+        $domain_count = 0;
+        $email_count = 0;
+        return redirect()->action('HomeController@blacklist');
+    }
+
+    public function insertE(Request $request) {
+        $new_info = new BlackList;
+        $new_info->domain = $request->input('blacklist_email');
+        $new_info->domainORemail = '2';
+        $new_info->save();
+        $blacklist = BlackList::get(['*']);
+        $domain_count = 0;
+        $email_count = 0;
+        return redirect()->action('HomeController@blacklist');
     }
 
     public function blacklistDelete($id) {
         $del = BlackList::where('id',$id)->first();
         $del->delete();
         $blacklist = BlackList::get(['*']);
-        return view('others.blacklist',compact('blacklist'));
+        $domain_count = 0;
+        $email_count = 0;
+        return redirect()->action('HomeController@blacklist');
     }
 }

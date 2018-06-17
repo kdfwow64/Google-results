@@ -16,6 +16,7 @@ class CreateBlacklistsTable extends Migration
         Schema::create('blacklists', function (Blueprint $table) {
             $table->increments('id');
             $table->string('domain')->nullable();
+            $table->integer('domainORemail')->unsigned()->nullable();
         });
     }
 
