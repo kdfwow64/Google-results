@@ -5,7 +5,7 @@
     <div class="row ">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Search Box</div>
+                <div class="panel-heading">Mail Template</div>
 
                 <div class="panel-body mail-template" style="text-align: center;">
                     @if (session('status'))
@@ -16,7 +16,7 @@
                     <input type="hidden" id="template_id" value="{{$template_id}}">
                     <div class="row" id="email_template_div">
                         <input type="input" id="email_title" value="{{$template_name}}">
-                        <textarea id="email_area" style="width: 100%;">{{$template_text}}</textarea>
+                        <textarea id="email_area" style="width: 100%;max-width: 100%;">{{$template_text}}</textarea>
                         <button class="btn btn-primary email-btn">Save Template</button>
                     </div>
                 </div>
