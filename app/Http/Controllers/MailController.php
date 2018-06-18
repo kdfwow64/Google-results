@@ -62,7 +62,7 @@ class MailController extends Controller
                 $objDemo->sender = 'Google Scraping Server';
                 $objDemo->receiver = $info[$i]['admins_name'];
          
-                if(preg_match("/^[a-zA-Z]*$/",$info[$i]['email'])) {
+                if(filter_var($info[$i]['email'],FILTER_VALIDATE_EMAIL)) {
                     Mail::to($info[$i]['email'])->send(new DemoEmail($objDemo));
                 }
             }

@@ -22,6 +22,7 @@ Route::get('/info', 'MainscrapingController@getdetailInfo');
 Route::get('/mail/send', 'MailController@send');
 Route::get('/mail/template', 'MailController@index');
 Route::get('/blacklist/manage', 'HomeController@blacklist');
+Route::get('/permission/manage', 'HomeController@permission');
 Route::get('/blacklist/delete/{id}', 'HomeController@blacklistDelete');
 
 Route::post('/home/scrape', 'MainscrapingController@searchwithKeyword');
@@ -31,3 +32,4 @@ Route::post('/mail/sendAll', 'MailController@sendAll');
 Route::post('/mail/save', 'MailController@save');
 Route::post('/blacklist/insertD', 'HomeController@insertD');
 Route::post('/blacklist/insertE', 'HomeController@insertE');
+Route::post('/permission/setPermission', 'HomeController@setPermission');

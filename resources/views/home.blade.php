@@ -13,6 +13,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
+
                     <span class="search_title">Google Search</span>
                     <span class="running" style="display: none;">It's running...</span>
                     
@@ -29,9 +30,11 @@
                             <button id="google_search" class="btn btn-warning">Search</button>
                         </div>
 
+                        @if($permission->value == 1)
                         <div class="col-md-4">
                             <button id="send_email_btn" class="btn btn-success">Send Mail</button>
                         </div>
+                        @endif
                     </div>
                     <br>
                     <span class="search_title">Search in the Database</span>

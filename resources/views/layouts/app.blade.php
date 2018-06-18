@@ -75,6 +75,13 @@
 
                             </li>
 
+                            <li>
+                                <a id="permission_navbar" class="nav-link" href="{{ url('permission/manage') }}" role="button"   aria-expanded="false" v-pre>
+                                    Permissions
+                                </a>
+
+                            </li>
+
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>

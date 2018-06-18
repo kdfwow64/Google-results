@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\Info;
 use App\Model\BlackList;
+use App\Model\Permission;
+use DB;
 
 class HomeController extends Controller
 {
@@ -25,7 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $permission = Permission::get(['*'])->first();
+        return view('home',compact('permission'));
     }
 
     public function getDomains(Request $request) {
@@ -47,6 +50,11 @@ class HomeController extends Controller
         $domain_count = 0;
         $email_count = 0;
         return view('others.blacklist',compact('blacklist','domain_count','email_count'));
+    }
+
+    public function permission() {
+        $permission = Permission::get(['*']);
+        return view('others.permission',compact('permission'));
     }
 
     public function insertD(Request $request) {
@@ -78,5 +86,15 @@ class HomeController extends Controller
         $domain_count = 0;
         $email_count = 0;
         return redirect()->action('HomeController@blacklist');
+    }
+
+    public function setPermission(Request $request) {
+        $id = $request->input('id');
+        $value = $request->input('value');
+        if($value == 'true')
+            DB::update('update permissions set value = 1 where id = ?' , [$id]);
+        else
+            DB::update('update permissions set value = 0 where id = ?' , [$id]);
+        echo $value;
     }
 }
